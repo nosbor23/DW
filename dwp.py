@@ -327,9 +327,7 @@ def problemamestre(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,co
     model.setObjective(quicksum((sigma[P.index(p)][F.index(f)]*X[P.index(p)][c][Fp[P.index(p)].index(f)][t])*lambd[P.index(p)][c] for p in P for f in Fp[P.index(p)] for t in K for c in range(len(colunas[P.index(p)])) if t+LT[P.index(p)][F.index(f)] < n) + quicksum((L[F.index(f)][t] * delta[F.index(f)] for f in F for t in K)) + quicksum(delta_fix[F.index(f)] * FI[F.index(f)][t] for f in F for t in K),GRB.MINIMIZE)       
     
     model.update()
-    #model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\outMP_it"+str(aa)+".lp")
     model.optimize()
-    #model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\outMP_it"+str(aa)+".sol")
     time=model.Runtime
     obj = model.objVal
     
@@ -408,7 +406,6 @@ def subproblema(P,F,Fp,Pf,n,D,LM,FM,LT,sigma,delta,beta,alpha,delta_fix,gamma,mi
         model.setObjective(quicksum((theta[pi] * S[t]) for t in K ) + quicksum((mi[pi][Fp[pi].index(f)][t]*gamma[pi][F.index(f)][t] + eta[F.index(f)][t] + LM[pi][F.index(f)]*k[pi][Fp[pi].index(f)][t])*A[Fp[pi].index(f)][t] for f in Fp[pi] for t in K) + quicksum((sigma[pi][F.index(f)] - mi[pi][Fp[pi].index(f)][t] - k[pi][Fp[pi].index(f)][t] - sigma[pi][F.index(f)]*u[F.index(f)][t] + alpha[pi][F.index(f)]*r[F.index(f)][t])*X[Fp[pi].index(f)][t] for f in Fp[pi] for t in K if t+LT[P.index(p)][F.index(f)] < n) - PI[pi] ,GRB.MINIMIZE)       
         
         model.update() 
-        model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\outSub_it"+str(cont)+"produto"+str(p)+".lp")
         model.optimize()
         status = model.Status
         time+=model.Runtime
@@ -416,7 +413,6 @@ def subproblema(P,F,Fp,Pf,n,D,LM,FM,LT,sigma,delta,beta,alpha,delta_fix,gamma,mi
         if status == GRB.Status.OPTIMAL or status == GRB.Status.SOLUTION_LIMIT: 
                 
                     obj = model.objVal
-                    model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\outSub_it"+str(cont)+"produto"+str(p)+".sol")
                     objv.append(obj)
                     nova_coluna += 1
                     a = []
@@ -567,9 +563,7 @@ def problemamestre_artificial(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,d
     model.setObjective(quicksum(A1[P.index(p)][Fp[P.index(p)].index(f)][t]for p in P for f in Fp[P.index(p)] for t in K) + quicksum(A2[F.index(f)][t] for f in F for t in K)+quicksum(A3[P.index(p)][Fp[P.index(p)].index(f)][t]for p in P for f in Fp[P.index(p)] for t in K) + quicksum(A4[F.index(f)][t] for f in F for t in K)+ quicksum(A5[F.index(f)][t] for f in F for t in K)+ quicksum(A6[P.index(p)]  for p in P) + quicksum(A7[P.index(p)]  for p in P),GRB.MINIMIZE)       
     
     model.update()
-    #model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\artificial\\outMPArt_it"+str(cont)+".lp")
     model.optimize()
-    #model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\artificial\\outMPArt_it"+str(cont)+".sol")
     time=model.Runtime
     obj = model.objVal
     print obj
@@ -648,7 +642,6 @@ def subproblema_artificial(P,F,Fp,Pf,n,D,LM,FM,LT,sigma,delta,beta,alpha,delta_f
         model.setObjective(quicksum((theta[pi] * S[t]) for t in K ) + quicksum((mi[pi][Fp[pi].index(f)][t]*gamma[pi][F.index(f)][t] + eta[F.index(f)][t] + LM[pi][F.index(f)]*k[pi][Fp[pi].index(f)][t])*A[Fp[pi].index(f)][t] for f in Fp[pi] for t in K) + quicksum(( - mi[pi][Fp[pi].index(f)][t] - k[pi][Fp[pi].index(f)][t] - sigma[pi][F.index(f)]*u[F.index(f)][t] + alpha[pi][F.index(f)]*r[F.index(f)][t])*X[Fp[pi].index(f)][t] for f in Fp[pi] for t in K if t+LT[P.index(p)][F.index(f)] < n) - PI[pi] ,GRB.MINIMIZE)       
         
         model.update() 
-        #model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\artificial\\outSubArt_it"+str(cont)+"produto"+str(p)+".lp")
         model.optimize()
         status = model.Status
         time+=model.Runtime
@@ -656,7 +649,6 @@ def subproblema_artificial(P,F,Fp,Pf,n,D,LM,FM,LT,sigma,delta,beta,alpha,delta_f
           
         if status == GRB.Status.OPTIMAL or status == GRB.Status.SOLUTION_LIMIT: 
             
-            #model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\artificial\\outSubArt_it"+str(cont)+"produto"+str(p)+".sol")
             obj = model.objVal
             objv.append(obj)
             if round(obj,4) < 0:            
@@ -758,9 +750,7 @@ def MP(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,colunas,cont,z
     model.setObjective(quicksum((theta[P.index(p)] * S[P.index(p)][t])*lambd[P.index(p)][c] for p in P for t in K for c in range(len(colunas[P.index(p)])) ) + quicksum((sigma[P.index(p)][F.index(f)]*X[P.index(p)][c][Fp[P.index(p)].index(f)][t])*lambd[P.index(p)][c] for p in P for f in Fp[P.index(p)] for t in K for c in range(len(colunas[P.index(p)])) if t+LT[P.index(p)][F.index(f)] < n) + quicksum((L[F.index(f)][t] * delta[F.index(f)] for f in F for t in K)) + quicksum(delta_fix[F.index(f)] * FI[F.index(f)][t] for f in F for t in K),GRB.MINIMIZE)       
     
     model.update()
-    #model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\outMP_it"+str(aa)+".lp")
     model.optimize()
-    #model.write("C:\\Users\\Robson\\Desktop\\UFMG\\dw\\outMP_it"+str(aa)+".sol")
     time=model.Runtime
     obj = model.objVal
     return obj  
