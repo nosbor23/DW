@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#Elaborado por Robson Vieira de Oliveira, 2018.
+#Elaborado por Robson Vieira de Oliveira, 2019.
 
 import random
 from gurobipy import *
@@ -766,10 +766,10 @@ def MP(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,colunas,cont,z
     return obj  
                    
 if __name__=="__main__":
-    Pr=[30] 
-    Fo=[15]
-    T=[6]
-    V=[0]
+    Pr=[30,40,50] 
+    Fo=[15,25]
+    T=[6,12,26,52]
+    V=[0,1,2,3,4]
     for pr in Pr:
         for fo in Fo:
             for te in T:
