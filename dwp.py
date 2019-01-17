@@ -361,7 +361,7 @@ def subproblema(P,F,Fp,Pf,n,D,LM,FM,LT,sigma,delta,beta,alpha,delta_fix,gamma,mi
         model = Model("SubProblema")
         #model.setParam('Presolve', 0)
         model.setParam('MIPFocus', 3)
-        model.setParam('SolutionLimit', 3)
+        model.setParam('SolutionLimit', 3)#coloquei solution limit 3 empiricamente, esse foi o valor que trouxe o melhor tempo de 1 a 10
         #model.setParam('DualReductions', 0)
         model.setParam('OutputFlag', 0)
         #model.setParam('MIPGap', 1.0)
