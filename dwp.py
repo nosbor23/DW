@@ -666,7 +666,7 @@ def subproblema_artificial(P,F,Fp,Pf,n,D,LM,FM,LT,sigma,delta,beta,alpha,delta_f
                 
     return Coluna,objv,nova_coluna,col_entrou,time
     
-def MP(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,colunas,cont,zmp,lmp,fimp,lambdmp):
+def MP(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,colunas,cont,zmp,lmp,fimp,lambdmp): #só usa os parametros para calcular o estoque, que n esta no PM
     time=0
     aa = cont
     model = Model("Problema Mestre")
@@ -764,6 +764,7 @@ if __name__=="__main__":
         for fo in Fo:
             for te in T:
                 for v in V:
+		    #alterar caminho aqui
                     I = loadPickledInst('C:\Users\Robson\Desktop\dwmlssp\inst\py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.dat')
                     P = I.P
                     F = I.F
@@ -797,10 +798,11 @@ if __name__=="__main__":
                                 z = z * 10e-3
                                 num = num + z
                             alpha[pi][fi] = num
-                            
+                    #alterar caminho aqui        
                     doc = open('C:\Users\Robson\Desktop\dwmlssp\\result\\resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
                     doc.write('RESOLUÇÃO INSTANCIA' +str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'\n\n')
                     doc.close()
+		    #alterar caminho aqui	
                     doc = open('C:\Users\Robson\Desktop\dwmlssp\\result\\resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'a')
                     K = range(n)
                     obj2 = 1
