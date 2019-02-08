@@ -5,6 +5,7 @@ from email.MIMEBase import MIMEBase
 from email import encoders
  
 fromaddr = "lasos.testes@gmail.com"
+#toaddr = "thiagoep@gmail.com"
 toaddr = "robsonviei@hotmail.com"
  
 msg = MIMEMultipart()
@@ -18,7 +19,7 @@ body = "Em anexo"
 msg.attach(MIMEText(body, 'plain'))
  
 filename = "resultados.zip"
-attachment = open("C:\\Users\\Robson\\Desktop\\Robson\\Teste Robson 1902\\resultados.zip", "rb")
+attachment = open("/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/resultados.zip", "rb")
  
 part = MIMEBase('application', 'octet-stream')
 part.set_payload((attachment).read())

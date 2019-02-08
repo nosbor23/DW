@@ -765,7 +765,7 @@ if __name__=="__main__":
             for te in T:
                 for v in V:
 		    #alterar caminho aqui
-                    I = loadPickledInst('C:\Users\Robson\Desktop\dwmlssp\inst\py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.dat')
+                    I = loadPickledInst('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/inst/py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.dat')
                     P = I.P
                     F = I.F
                     Pf = I.Pf
@@ -799,11 +799,11 @@ if __name__=="__main__":
                                 num = num + z
                             alpha[pi][fi] = num
                     #alterar caminho aqui        
-                    doc = open('C:\Users\Robson\Desktop\dwmlssp\\result\\resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
+                    doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
                     doc.write('RESOLUÇÃO INSTANCIA' +str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'\n\n')
                     doc.close()
 		    #alterar caminho aqui	
-                    doc = open('C:\Users\Robson\Desktop\dwmlssp\\result\\resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'a')
+                    doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'a')
                     K = range(n)
                     obj2 = 1
                     coluns = [[] for p in P]
