@@ -765,7 +765,9 @@ if __name__=="__main__":
             for te in T:
                 for v in V:
 		    #alterar caminho aqui
-                    I = loadPickledInst('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/inst/py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.dat')
+                    H = pickle.load('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/inst/py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.dat', 'r')
+	            pickle.dump(H, open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/inst/py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'_bin.dat', 'wb'))
+                    I = loadPickledInst('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/inst/py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'_bin.dat')
                     P = I.P
                     F = I.F
                     Pf = I.Pf
