@@ -1,18 +1,35 @@
 Inicio dos testes
-Traceback (most recent call last):
-  File "dwp.py", line 768, in <module>
-    I = loadPickledInst('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/inst/py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.dat')
-  File "dwp.py", line 32, in loadPickledInst
-    I = pickle.load(f)
-  File "/usr/lib/python2.7/pickle.py", line 1384, in load
-    return Unpickler(file).load()
-  File "/usr/lib/python2.7/pickle.py", line 864, in load
-    dispatch[key](self)
-  File "/usr/lib/python2.7/pickle.py", line 1096, in load_global
-    klass = self.find_class(module, name)
-  File "/usr/lib/python2.7/pickle.py", line 1130, in find_class
-    __import__(module)
-ImportError: No module named numpy.core.multiarray
+  File "dwp1.py", line 768
+    P = I.P
+          ^
+IndentationError: unindent does not match any outer indentation level
+Testes finalizados, compactando...
+compactado, enviando e-mail...
+Finalizado
+
+Inicio dos testes
+  File "dwp2.py", line 768
+    P = I.P
+          ^
+IndentationError: unindent does not match any outer indentation level
+Testes finalizados, compactando...
+compactado, enviando e-mail...
+Finalizado
+
+Inicio dos testes
+  File "dwp3.py", line 768
+    P = I.P
+          ^
+IndentationError: unindent does not match any outer indentation level
+Testes finalizados, compactando...
+compactado, enviando e-mail...
+Finalizado
+
+Inicio dos testes
+  File "dwp4.py", line 768
+    P = I.P
+          ^
+IndentationError: unindent does not match any outer indentation level
 Testes finalizados, compactando...
 compactado, enviando e-mail...
 Finalizado
