@@ -756,9 +756,9 @@ def MP(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,colunas,cont,z
     return obj  
                    
 if __name__=="__main__":
-    Pr=[30] 
-    Fo=[25]
-    T=[6,12,26,52]
+    Pr=[30,40,50] 
+    Fo=[15,25]
+    T=[12]
     V=[0,1,2,3,4]
     for pr in Pr:
         for fo in Fo:
