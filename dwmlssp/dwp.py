@@ -798,6 +798,7 @@ if __name__=="__main__":
                                 z = z * 10e-3
                                 num = num + z
                             alpha[pi][fi] = num
+                            
                     K = range(n)
                     obj2 = 1
                     coluns = [[] for p in P]
@@ -815,8 +816,11 @@ if __name__=="__main__":
                     var=[]
                     o = 1
                     while obj2 > 0.000000000000000001:
+                        print cont1
+                        #print("\nSUBPROBLEMA_ARTIFICIAL\n")
                         col,obj,nova_col,col_entrou,runtime = subproblema_artificial(P,F,Fp,Pf,n,D,LM,FM,LT,sigma,delta,beta,alpha,delta_fix,gamma,mi,k,u,r,eta,PI,cont1) #gera uma coluna com o mi e pi
                         tempo+=runtime
+                        #print nova_col
                         if nova_col == 0:
                             break
                         z = 0
@@ -839,16 +843,15 @@ if __name__=="__main__":
                         while z < len(col):
                             coluns[col[z][0]].append(col[z][1])
                             z+=1
-                               
+                                                    
                         if nova_col == 0:
                             doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
 			    doc.write('RESOLUÇÃO INSTANCIA' +str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'\n\n')
-			    doc.close()
-			    doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'a')
+                            doc.close()
+                            doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'a')
                     	    zmp,lmp,fimp,lambdmp = variaveis(var,n,F,Pf,Fp,P,coluns,o)
                             obj5 = MP(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,coluns,cont2,zmp,lmp,fimp,lambdmp)
-                            
-			    doc.write("\nValores das variáveis z\n")
+                            doc.write("\nValores das variáveis z\n")
                             for x in zmp:
                                 doc.write("%s\n" %x)
                             doc.write("\nValores das variáveis l\n")
@@ -908,12 +911,13 @@ if __name__=="__main__":
                                     fa = Fp[pi].index(f)
                                     for t in K:
                                         doc.write("\ny[p"+str(pi+1)+"][f"+str(fa+1)+"][t"+str(t+1)+"]:%s\n" %y[pi][fa][t])
-                            doc.write("\nTempo total gasto é %.5f\n" %tempo)
-                            doc.write("\nTempo total gasto real é %.5f\n" %( time() - strt ))
-                            doc.write("\nFunção obj final %.5f\n" %obj5)
-                            doc.write("\nNumero de iterações final: %d\n" %(cont1+cont2))
-                            doc.write("\nNumero de iterações ARTIFICIAL: %d\n" %cont1)
-                            doc.write("\nNumero de iterações DW: %d\n" %cont2)
-			    doc.close()
+                            doc.write("\n\nTempo total gasto é %.5f\n" %tempo)
+                            doc.write("\n\nTempo total gasto real é %.5f\n" %( time() - strt ))
+                            doc.write("\n\nFunção obj final %.5f\n" %obj5)
+                            doc.write("\n\nNumero de iterações final: %d\n" %(cont1+cont2))
+                            doc.write("\n\nNumero de iterações ARTIFICIAL: %d\n" %cont1)
+                            doc.write("\n\nNumero de iterações DW: %d\n" %cont2)
+                            doc.close()
                             break
                         cont2 += 1
+                     
