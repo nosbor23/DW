@@ -756,9 +756,9 @@ def MP(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,colunas,cont,z
     return obj  
                    
 if __name__=="__main__":
-    Pr=[30,40,50] 
-    Fo=[15,25]
-    T=[6,12,26,52]
+    Pr=[30] 
+    Fo=[15]
+    T=[26,52]
     V=[0,1,2,3,4]
     for pr in Pr:
         for fo in Fo:
@@ -798,12 +798,6 @@ if __name__=="__main__":
                                 z = z * 10e-3
                                 num = num + z
                             alpha[pi][fi] = num
-                    #alterar caminho aqui        
-                    doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
-                    doc.write('RESOLUÇÃO INSTANCIA' +str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'\n\n')
-                    doc.close()
-		    #alterar caminho aqui	
-                    doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'a')
                     K = range(n)
                     obj2 = 1
                     coluns = [[] for p in P]
@@ -821,94 +815,17 @@ if __name__=="__main__":
                     var=[]
                     o = 1
                     while obj2 > 0.000000000000000001:
-                        print cont1
-                        #print("\nSUBPROBLEMA_ARTIFICIAL\n")
                         col,obj,nova_col,col_entrou,runtime = subproblema_artificial(P,F,Fp,Pf,n,D,LM,FM,LT,sigma,delta,beta,alpha,delta_fix,gamma,mi,k,u,r,eta,PI,cont1) #gera uma coluna com o mi e pi
                         tempo+=runtime
-                        #print nova_col
                         if nova_col == 0:
                             break
                         z = 0
                         while z < len(col):
                             coluns[col[z][0]].append(col[z][1])
                             z+=1
-                           
-                        doc.write("Iteração artificial número %d\n" %cont1)
-                        doc.write("\nSUBPROBLEMA_ARTIFICIAL\n")
-                        for x in obj:
-                            doc.write("Valor função obj: %f\n" %x)
-                        doc.write("Entraram %d colunas:\n" %nova_col) 
-                        for z in col_entrou:
-                            doc.write("\n(%s)" %(z))
-                       
-                        for x in col:
-                        
-                            doc.write("Produto: %d\n" %(x[0]+1)) 
-                            doc.write("Valores de X: %s\n" %x[1][0])
-                            doc.write("Valores de Y: %s\n" %x[1][1])
-                        
                         mi,k,u,r,PI,obj2,runtime,var,eta = problemamestre_artificial(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,coluns,cont1)#cria novos duais
                         zmp,lmp,fimp,lambdmp,a1,a2,a3,a4,a5,a6,a7 = variaveis(var,n,F,Pf,Fp,P,coluns,o)
                         tempo+=runtime
-                        
-                        doc.write("\nPROBLEMA_MESTRE_ARTIFICIAL\n")
-                        doc.write("Valor função obj: %f\n" %obj2)
-                                            
-                        doc.write("Valores das variáveis A1\n")
-                        for x in a1:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis A2\n")
-                        for x in a2:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis A3\n")
-                        for x in a3:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis A4\n")
-                        for x in a4:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis A5\n")
-                        for x in a5:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis A6\n")
-                        for x in a6:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis A7\n")
-                        for x in a7:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis z\n")
-                        for x in zmp:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis l\n")
-                        for x in lmp:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis fi\n")
-                        for x in fimp:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis lambda\n")
-                        for x in lambdmp:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (mi)\n")
-                        for x in mi:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (eta)\n")
-                        for x in eta:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (k)\n")
-                        for x in k:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (u)\n")
-                        for x in u:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (r)\n")
-                        for x in r:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (PI)\n")
-                        for x in PI:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (eta)\n")
-                        for x in eta:
-                            doc.write("%s\n" %x)
-                        
                         cont1 += 1 
                                            
                     while True:
@@ -916,46 +833,6 @@ if __name__=="__main__":
                         mi,k,u,r,PI,obj3,runtime,var,eta = problemamestre(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,coluns,cont2)
                         zmp,lmp,fimp,lambdmp = variaveis(var,n,F,Pf,Fp,P,coluns,o)
                         tempo+=runtime
-                        
-                        doc.write("Iteração número %d\n" %cont2)
-                        
-                        doc.write("\n PROBLEMA_MESTRE \n")
-                        doc.write("Valor função obj: %f\n" %obj3)
-                        #doc.write("Valores das variáveis y\n")
-                        #for x in ymp:
-                           # doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis z\n")
-                        for x in zmp:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis l\n")
-                        for x in lmp:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis fi\n")
-                        for x in fimp:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores das variáveis lambda\n")
-                        for x in lambdmp:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (mi)\n")
-                        for x in mi:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (eta)\n")
-                        for x in eta:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (k)\n")
-                        for x in k:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (u)\n")
-                        for x in u:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (r)\n")
-                        for x in r:
-                            doc.write("%s\n" %x)
-                        doc.write("Valores dos duais (PI)\n")
-                        for x in PI:
-                            doc.write("%s\n" %x)
-                        
-                                
                         col,obj,nova_col,col_entrou,runtime,obj4 = subproblema(P,F,Fp,Pf,n,D,LM,FM,LT,sigma,delta,beta,alpha,delta_fix,gamma,mi,k,u,r,eta,PI,cont2)#utiliza os novos duais para gerar uma nova coluna
                         tempo+=runtime
                         z = 0
@@ -963,24 +840,44 @@ if __name__=="__main__":
                             coluns[col[z][0]].append(col[z][1])
                             z+=1
                                
-                        doc.write("\nSUBPROBLEMA\n")
-                        for x in obj:
-                            doc.write("Valor função obj: %f\n" %x)
-                        doc.write("Entraram %d colunas:\n" %nova_col) 
-                        for z in col_entrou:
-                            doc.write("\n(%s)" %(z))  
-                        
-                        for x in col:
-                            
-                            doc.write("Produto: %d\n" %(x[0]+1)) 
-                            doc.write("Valores de X: %s\n" %x[1])
-                            doc.write("Valores de Y: %s\n" %x[1][1])
-                            
                         if nova_col == 0:
-                            
-                            zmp,lmp,fimp,lambdmp = variaveis(var,n,F,Pf,Fp,P,coluns,o)
+                            doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
+			    doc.write('RESOLUÇÃO INSTANCIA' +str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'\n\n')
+			    doc.close()
+			    doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'a')
+                    	    zmp,lmp,fimp,lambdmp = variaveis(var,n,F,Pf,Fp,P,coluns,o)
                             obj5 = MP(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,coluns,cont2,zmp,lmp,fimp,lambdmp)
-                            doc.write('\nRESOLUÇÃO INSTANCIA' +str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'\n\n')
+                            
+			    doc.write("\nValores das variáveis z\n")
+                            for x in zmp:
+                                doc.write("%s\n" %x)
+                            doc.write("\nValores das variáveis l\n")
+                            for x in lmp:
+                                doc.write("%s\n" %x)
+                            doc.write("\nValores das variáveis fi\n")
+                            for x in fimp:
+                                doc.write("%s\n" %x)
+                            doc.write("\nValores das variáveis lambda\n")
+                            for x in lambdmp:
+                                doc.write("%s\n" %x)
+                            doc.write("\nValores dos duais (mi)\n")
+                            for x in mi:
+                                doc.write("%s\n" %x)
+                            doc.write("\nValores dos duais (eta)\n")
+                            for x in eta:
+                                doc.write("%s\n" %x)
+                            doc.write("\nValores dos duais (k)\n")
+                            for x in k:
+                                doc.write("%s\n" %x)
+                            doc.write("\nValores dos duais (u)\n")
+                            for x in u:
+                                doc.write("%s\n" %x)
+                            doc.write("\nValores dos duais (r)\n")
+                            for x in r:
+                                doc.write("%s\n" %x)
+                            doc.write("\nValores dos duais (PI)\n")
+                            for x in PI:
+                                doc.write("%s\n" %x)
                             X = [[[] for c in range(len(coluns[P.index(p)]))]for p in P] 
                             Y = [[[] for c in range(len(coluns[P.index(p)]))]for p in P] 
                             for p in P:
@@ -1003,20 +900,20 @@ if __name__=="__main__":
                                 for f in Fp[P.index(p)]:
                                     fa = Fp[pi].index(f)
                                     for t in K:
-                                        doc.write("x[p"+str(pi+1)+"][f"+str(fa+1)+"][t"+str(t+1)+"]:%s\n" %x[pi][fa][t])
+                                        doc.write("\nx[p"+str(pi+1)+"][f"+str(fa+1)+"][t"+str(t+1)+"]:%s\n" %x[pi][fa][t])
                             doc.write("\nValores originais (y)\n\n")
                             for p in P:
                                 pi = P.index(p)
                                 for f in Fp[P.index(p)]:
                                     fa = Fp[pi].index(f)
                                     for t in K:
-                                        doc.write("y[p"+str(pi+1)+"][f"+str(fa+1)+"][t"+str(t+1)+"]:%s\n" %y[pi][fa][t])
+                                        doc.write("\ny[p"+str(pi+1)+"][f"+str(fa+1)+"][t"+str(t+1)+"]:%s\n" %y[pi][fa][t])
                             doc.write("\nTempo total gasto é %.5f\n" %tempo)
                             doc.write("\nTempo total gasto real é %.5f\n" %( time() - strt ))
                             doc.write("\nFunção obj final %.5f\n" %obj5)
                             doc.write("\nNumero de iterações final: %d\n" %(cont1+cont2))
                             doc.write("\nNumero de iterações ARTIFICIAL: %d\n" %cont1)
                             doc.write("\nNumero de iterações DW: %d\n" %cont2)
+			    doc.close()
                             break
                         cont2 += 1
-                    doc.close() 
