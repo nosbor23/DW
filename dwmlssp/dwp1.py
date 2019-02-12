@@ -797,7 +797,7 @@ if __name__=="__main__":
                                 z = int(x[a+1:])
                                 z = z * 10e-3
                                 num = num + z
-                            alpha[pi][fi] = num
+                            	alpha[pi][fi] = num
                             
                     K = range(n)
                     obj2 = 1
