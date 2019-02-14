@@ -609,8 +609,7 @@ if __name__=="__main__":
         for fo in Fo:
             for te in T:
                 for v in V:
-                    #I = loadPickledInst('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/inst/py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'_bin.dat')
-                    I = loadPickledInst('C:\Users\Robson\Desktop\UFMG\py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'_bin.dat')
+                    I = loadPickledInst('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/inst/py_inst_p'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'_bin.dat')
                     P = I.P
                     F = I.F
                     Pf = I.Pf
@@ -686,15 +685,11 @@ if __name__=="__main__":
                             z+=1
                                                     
                         if nova_col == 0:
-                            #doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
-                            #doc.write('RESOLUÇÃO INSTANCIA' +str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'\n\n')
-                            #doc.close()
-                            #doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
-                            doc = open('C:\Users\Robson\Desktop\UFMG\\dw\\resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
-			    doc.write('RESOLUÇÃO INSTANCIA' +str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'\n\n')
+                            doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
+                            doc.write('RESOLUÇÃO INSTANCIA' +str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'\n\n')
                             doc.close()
-                            doc = open('C:\Users\Robson\Desktop\UFMG\\dw\\resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'a')
-                    	    zmp,lmp,fimp,lambdmp = variaveis(var,n,F,Pf,Fp,P,coluns,o)
+                            doc = open('/home/servidor-lasos/Thiago/Robson/DW/dwmlssp/result/resultados'+str(pr)+'f'+str(fo)+'t'+str(te)+'_'+str(v)+'.txt', 'w')
+                            zmp,lmp,fimp,lambdmp = variaveis(var,n,F,Pf,Fp,P,coluns,o)
                             obj5 = MP(P,F,Fp,Pf,s0,n,D,LT,theta,sigma,delta,beta,alpha,delta_fix,coluns,cont2,zmp,lmp,fimp,lambdmp)
                             doc.write("\nValores das variáveis z\n")
                             for x in zmp:
